@@ -22,6 +22,8 @@ private slots:
 
     void on_addImageButton_clicked();
 
+    void on_deleteImageButton_clicked();
+
 private:
     Ui::AddPlayer *ui;
 };
