@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>add_user.png</file>
+        <file>delete_user.png</file>
+        <file>pdf.png</file>
+        <file>save_doc.png</file>
+        <file>ball.png</file>
+        <file>preview.png</file>
+        <file>edit_user.png</file>
+    </qresource>
+    <qresource prefix="/players_images"/>
+</RCC>
