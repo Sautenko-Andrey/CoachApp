@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSqlQuery query(dbManager.getDB());
 
-    if(query.exec("SELECT first_name, second_name FROM Player ORDER BY first_name")){
+    if(query.exec("SELECT first_name, last_name FROM Player ORDER BY last_name")){
         QStringList all_players;
         while(query.next()){
             all_players.append(query.value(0).toString() + " " + query.value(1).toString());

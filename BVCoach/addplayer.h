@@ -2,6 +2,8 @@
 #define ADDPLAYER_H
 
 #include <QDialog>
+#include "databasemanager.h"
+#include <QImage>
 
 namespace Ui {
 class AddPlayer;
@@ -26,6 +28,11 @@ private slots:
 
 private:
     Ui::AddPlayer *ui;
+
+    DataBaseManager dbManager;
+
+    QImage image;
+
 };
 
 #endif // ADDPLAYER_H
