@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include "addplayer.h"
 #include <memory>
+#include <QInputDialog>
+#include <QDebug>
 
 
 enum class typeOfTraining {
@@ -48,22 +50,25 @@ MainWindow::MainWindow(QWidget *parent)
     // Type of training combobox default settings
     ui->typeOfTrainingComboBox->addItems(typesOfTraining);
 
-    QSqlQuery query(dbManager.getDB());
+    // QSqlQuery query(dbManager.getDB());
 
-    if(query.exec("SELECT first_name, last_name FROM Player ORDER BY last_name")){
-        QStringList all_players;
-        while(query.next()){
-            all_players.append(query.value(0).toString() + " " + query.value(1).toString());
-        }
+    // if(query.exec("SELECT first_name, last_name FROM Player ORDER BY last_name")){
+    //     QStringList all_players;
+    //     while(query.next()){
+    //         all_players.append(query.value(0).toString() + " " + query.value(1).toString());
+    //     }
 
-        // Players list combobox settings
-        ui->picPlayerComboBox->addItems(all_players);
-    }
-    else{
-        QMessageBox::warning(this, "Query error",
-                                 "Couldn't select players from the database."
-                             "Probably players database is empty. Fill it.");
-    }
+    //     // Players list combobox settings
+    //     ui->picPlayerComboBox->addItems(all_players);
+    // }
+    // else{
+    //     QMessageBox::warning(this, "Query error",
+    //                              "Couldn't select players from the database."
+    //                          "Probably players database is empty. Fill it.");
+    // }
+
+    //loading players from the database
+    load_players();
 
     // working with exercises list
 
@@ -82,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->exercisesListView->setModel(default_exercises_model);
     }
     else{
-        qDebug() << "Couldn't open DB for default exercises view";
+        QMessageBox::warning(this, "Error!", "Couldn't load exercises");
     }
 
     ui->selectedExercisesList->setAcceptDrops(true);
@@ -99,6 +104,32 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->deleteAllExercisesButton, SIGNAL(clicked(bool)),
             ui->selectedExercisesList, SLOT(clear()));
 
+}
+
+
+void MainWindow::load_players()
+{
+    // //clear players list
+    // if(!all_players.empty()){
+    //     all_players.clear();
+    // }
+
+    QSqlQuery query(dbManager.getDB());
+
+    if(query.exec("SELECT first_name, last_name FROM Player ORDER BY last_name")){
+        // QStringList all_players;
+        while(query.next()){
+            all_players.append(query.value(0).toString() + " " + query.value(1).toString());
+        }
+
+        // Players list combobox settings
+        ui->picPlayerComboBox->addItems(all_players);
+    }
+    else{
+        QMessageBox::warning(this, "Query error",
+                             "Couldn't select players from the database."
+                             "Probably players database is empty. Fill it.");
+    }
 }
 
 void MainWindow::getExercises(const int type_id)
@@ -160,5 +191,27 @@ void MainWindow::on_actionAdd_anew_player_triggered()
 {
     addPlayerAction = std::make_unique<AddPlayer>(this);
     addPlayerAction->show();
+}
+
+
+void MainWindow::on_actionDelete_player_triggered()
+{
+    // deleting player from the database
+    deletePlayerAction = std::make_unique<DeletePlayer>(this);
+    deletePlayerAction->setWindowTitle("Deleting a player");
+    deletePlayerAction->show();
+
+}
+
+
+void MainWindow::on_reloadPlayersButton_clicked()
+{
+    //clear players list
+    // if(!all_players.empty()){
+    //     all_players.clear();
+    // }
+
+    // a one more query to getting updated data
+    load_players();
 }
 

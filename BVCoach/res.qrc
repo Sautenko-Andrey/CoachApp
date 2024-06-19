@@ -7,6 +7,8 @@
         <file>ball.png</file>
         <file>preview.png</file>
         <file>edit_user.png</file>
+        <file>update.png</file>
+        <file>reload.png</file>
     </qresource>
     <qresource prefix="/players_images"/>
 </RCC>

@@ -81,13 +81,13 @@ void AddPlayer::on_saveButton_clicked()
     QString player_phone = ui->phoneLine->text();
 
     // test
-    qDebug() << player_first_name;
-    qDebug() << player_last_name;
-    qDebug() << player_age;
-    qDebug() << player_height;
-    qDebug() << player_sex;
-    qDebug() << player_hometown;
-    qDebug() << player_phone;
+    // qDebug() << player_first_name;
+    // qDebug() << player_last_name;
+    // qDebug() << player_age;
+    // qDebug() << player_height;
+    // qDebug() << player_sex;
+    // qDebug() << player_hometown;
+    // qDebug() << player_phone;
 
 
 

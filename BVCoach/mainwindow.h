@@ -5,6 +5,7 @@
 #include <QStringListModel>
 #include "databasemanager.h"
 #include "addplayer.h"
+#include "deleteplayer.h"
 #include <memory>
 
 
@@ -34,12 +35,19 @@ private slots:
 
     void on_actionAdd_anew_player_triggered();
 
+    void on_actionDelete_player_triggered();
+
+
+    void on_reloadPlayersButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     DataBaseManager dbManager;
 
     QStringListModel *exercises_model;
+
+    QStringList all_players;
 
     inline static const QStringList timeOfDay{
         "morning", "noon", "evening"
@@ -51,6 +59,9 @@ private:
 
     void getExercises(const int type_id);
 
+    void load_players();
+
     std::unique_ptr<AddPlayer> addPlayerAction;
+    std::unique_ptr<DeletePlayer> deletePlayerAction;
 };
 #endif // MAINWINDOW_H

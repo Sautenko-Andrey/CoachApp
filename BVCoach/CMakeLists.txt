@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         res.qrc
         databasemanager.h databasemanager.cpp
         addplayer.h addplayer.cpp addplayer.ui
+        deleteplayer.h deleteplayer.cpp deleteplayer.ui
 
     )
 # Define target properties for Android with Qt 6 as:
